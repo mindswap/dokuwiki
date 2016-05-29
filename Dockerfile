@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:trusty
 MAINTAINER MindSwap <mindswap@ro.ru>
 
 RUN apt-get update && \
