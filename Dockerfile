@@ -1,5 +1,5 @@
 FROM ubuntu:14.04
-MAINTAINER Ilya Stepanov <dev@ilyastepanov.com>
+MAINTAINER MindSwap <mindswap@ro.ru>
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys E5267A6C && \
     echo 'deb http://ppa.launchpad.net/ondrej/php5/ubuntu trusty main' > /etc/apt/sources.list.d/ondrej-php5-trusty.list && \
@@ -7,6 +7,15 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys E5267A6C && \
     apt-get install -y supervisor nginx php5-fpm php5-gd curl && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN curl -O -L "https://github.com/selfthinker/dokuwiki_plugin_wrap/archive/stable.zip" && \
+    unzip stable.zip -d /var/www/lib/plugins/ && \
+    mv /dokuwiki_plugin_wrap-stable /var/www/lib/plugins/wrap && \
+    rm -rf stable.zip
+
+RUN curl -O -L "http://www.heiko-barth.de/downloads/dw_codebutton.zip" && \
+    unzip dw_codebutton.zip -d /var/www/lib/plugins/ && \
+    rm -rf dw_codebutton.zip
+    
 ENV DOKUWIKI_VERSION 2015-08-10a
 ENV MD5_CHECKSUM a4b8ae00ce94e42d4ef52dd8f4ad30fe
 
