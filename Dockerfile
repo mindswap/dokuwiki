@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 MAINTAINER MindSwap <mindswap@ro.ru>
 
 RUN apt-get update && \
-    apt-get install -y supervisor nginx php5-fpm php5-gd curl && \
+    apt-get install -y supervisor nginx php5-fpm php5-gd curl unzip && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN curl -O -L "https://github.com/selfthinker/dokuwiki_plugin_wrap/archive/stable.zip" && \
