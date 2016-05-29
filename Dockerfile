@@ -4,20 +4,11 @@ MAINTAINER MindSwap <mindswap@ro.ru>
 RUN apt-get update && \
     apt-get install -y supervisor nginx php5-fpm php5-gd curl unzip && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-RUN curl -O -L "https://github.com/selfthinker/dokuwiki_plugin_wrap/archive/stable.zip" && \
-    unzip stable.zip -d /var/www/lib/plugins/ && \
-    mv /var/www/lib/plugins/dokuwiki_plugin_wrap-stable/ /var/www/lib/plugins/wrap/ && \
-    rm -rf stable.zip
-
-RUN curl -O -L "http://www.heiko-barth.de/downloads/dw_codebutton.zip" && \
-    unzip dw_codebutton.zip -d /var/www/lib/plugins/ && \
-    rm -rf dw_codebutton.zip
     
 ENV DOKUWIKI_VERSION 2015-08-10a
 ENV MD5_CHECKSUM a4b8ae00ce94e42d4ef52dd8f4ad30fe
 
-RUN mkdir -p /var/www /var/dokuwiki-storage/data && \
+RUN mkdir -p /var/www /var/www/lib/plugins/ /var/dokuwiki-storage/data &&  \
     cd /var/www && \
     curl -O "http://download.dokuwiki.org/src/dokuwiki/dokuwiki-$DOKUWIKI_VERSION.tgz" && \
     echo "$MD5_CHECKSUM  dokuwiki-$DOKUWIKI_VERSION.tgz" | md5sum -c - && \
@@ -38,12 +29,21 @@ RUN mkdir -p /var/www /var/dokuwiki-storage/data && \
     mv /var/www/conf /var/dokuwiki-storage/conf && \
     ln -s /var/dokuwiki-storage/conf /var/www/conf
 
+RUN curl -O -L "https://github.com/selfthinker/dokuwiki_plugin_wrap/archive/stable.zip" && \
+    unzip stable.zip -d /var/www/lib/plugins/ && \
+    mv /var/www/lib/plugins/dokuwiki_plugin_wrap-stable/ /var/www/lib/plugins/wrap/ && \
+    rm -rf stable.zip
+
+RUN curl -O -L "http://www.heiko-barth.de/downloads/dw_codebutton.zip" && \
+    unzip dw_codebutton.zip -d /var/www/lib/plugins/ && \
+    rm -rf dw_codebutton.zip
+    
 RUN echo "cgi.fix_pathinfo = 0;" >> /etc/php5/fpm/php.ini
 RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm /etc/nginx/sites-enabled/*
-ADD dokuwiki.conf /etc/nginx/sites-enabled/
-
+ADD dokuwiki.conf /etc/nginx/sites-enabled/    
+    
 ADD supervisord.conf /etc/supervisord.conf
 ADD start.sh /start.sh
 RUN chmod +x /start.sh
