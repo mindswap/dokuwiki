@@ -9,7 +9,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys E5267A6C && \
 
 RUN curl -O -L "https://github.com/selfthinker/dokuwiki_plugin_wrap/archive/stable.zip" && \
     unzip stable.zip -d /var/www/lib/plugins/ && \
-    mv /dokuwiki_plugin_wrap-stable /var/www/lib/plugins/wrap && \
+    mv /var/www/lib/plugins/dokuwiki_plugin_wrap-stable/ /var/www/lib/plugins/wrap/ && \
     rm -rf stable.zip
 
 RUN curl -O -L "http://www.heiko-barth.de/downloads/dw_codebutton.zip" && \
