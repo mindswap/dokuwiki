@@ -1,9 +1,7 @@
 FROM ubuntu:14.04
 MAINTAINER MindSwap <mindswap@ro.ru>
 
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys E5267A6C && \
-    echo 'deb http://ppa.launchpad.net/ondrej/php5/ubuntu trusty main' > /etc/apt/sources.list.d/ondrej-php5-trusty.list && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get install -y supervisor nginx php5-fpm php5-gd curl && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
