@@ -5,8 +5,8 @@ RUN apt-get update && \
     apt-get install -y supervisor nginx php5-fpm php5-gd curl unzip && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
     
-ENV DOKUWIKI_VERSION 2015-08-10a
-ENV MD5_CHECKSUM a4b8ae00ce94e42d4ef52dd8f4ad30fe
+ENV DOKUWIKI_VERSION 2016-06-26
+ENV MD5_CHECKSUM 08f65b37c7a423172306804932bf4823
 
 RUN mkdir -p /var/www /var/www/lib/plugins/ /var/dokuwiki-storage/data &&  \
     cd /var/www && \
