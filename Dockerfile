@@ -29,12 +29,12 @@ RUN mkdir -p /var/www /var/www/lib/plugins/ /var/dokuwiki-storage/data &&  \
     mv /var/www/conf /var/dokuwiki-storage/conf && \
     ln -s /var/dokuwiki-storage/conf /var/www/conf
 
-RUN curl -O -L "https://github.com/selfthinker/dokuwiki_plugin_wrap/archive/stable.zip" && \
+RUN wget -q "https://github.com/selfthinker/dokuwiki_plugin_wrap/archive/stable.zip" && \
     unzip stable.zip -d /var/www/lib/plugins/ && \
     mv /var/www/lib/plugins/dokuwiki_plugin_wrap-stable/ /var/www/lib/plugins/wrap/ && \
     rm -rf stable.zip
 
-RUN curl -O -L "http://www.heiko-barth.de/downloads/dw_codebutton.zip" && \
+RUN wget -q "http://www.heiko-barth.de/downloads/dw_codebutton.zip" && \
     unzip dw_codebutton.zip -d /var/www/lib/plugins/ && \
     rm -rf dw_codebutton.zip
     
