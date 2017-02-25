@@ -6,7 +6,7 @@ RUN apt-get update && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
     
 ENV DOKUWIKI_VERSION 2017-02-19a
-ENV MD5_CHECKSUM 78e8c27291fbc3de04c7f107c3f7725a
+ENV MD5_CHECKSUM 4e5279469dd71a5b831d8e84c74d415b
 
 RUN mkdir -p /var/www /var/www/lib/plugins/ /var/dokuwiki-storage/data &&  \
     cd /var/www && \
