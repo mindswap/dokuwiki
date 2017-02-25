@@ -2,7 +2,7 @@ FROM ubuntu:trusty
 MAINTAINER MindSwap <mindswap@ro.ru>
 
 RUN apt-get update && \
-    apt-get install -y supervisor nginx php5-fpm php5-gd curl unzip && \
+    apt-get install -y supervisor nginx php5-fpm php5-gd wget unzip && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
     
 ENV DOKUWIKI_VERSION 2017-02-19a
@@ -10,7 +10,7 @@ ENV MD5_CHECKSUM 4e5279469dd71a5b831d8e84c74d415b
 
 RUN mkdir -p /var/www /var/www/lib/plugins/ /var/dokuwiki-storage/data &&  \
     cd /var/www && \
-    curl -O "http://download.dokuwiki.org/src/dokuwiki/dokuwiki-$DOKUWIKI_VERSION.tgz" && \
+    wget -q "http://download.dokuwiki.org/src/dokuwiki/dokuwiki-$DOKUWIKI_VERSION.tgz" && \
     echo "$MD5_CHECKSUM  dokuwiki-$DOKUWIKI_VERSION.tgz" | md5sum -c - && \
     tar xzf "dokuwiki-$DOKUWIKI_VERSION.tgz" --strip 1 && \
     rm "dokuwiki-$DOKUWIKI_VERSION.tgz" && \
