@@ -9,7 +9,7 @@ Assume your docker host is localhost and HTTP public port is 8000 (change these 
 
 First, run new dokuwiki container:
 
-    docker run -d -p 8000:80 --name dokuwiki mindswap/dokuwiki:2.0
+    docker run -dit --restart=always  -p 8010:80 --volumes-from DOKUWIKI-DATA --name DOKUWIKI mindswap/dokuwiki
 
 Then setup dokuwiki using installer at URL `http://localhost:8000/install.php`
 
