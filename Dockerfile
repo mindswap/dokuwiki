@@ -19,7 +19,7 @@ RUN apt-get update && \
 ENV DOKUWIKI_VERSION 2018-04-22a
 ENV MD5_CHECKSUM 18765a29508f96f9882349a304bffc03
 
-RUN mkdir -p /var/www /var/www/lib/plugins/ /var/dokuwiki-storage/data &&  \
+RUN mkdir -p /var/www /var/www/lib/plugins/ /var/dokuwiki-storage/data /var/run/php &&  \
     cd /var/www && \
     wget -q "http://download.dokuwiki.org/src/dokuwiki/dokuwiki-$DOKUWIKI_VERSION.tgz" && \
     echo "$MD5_CHECKSUM  dokuwiki-$DOKUWIKI_VERSION.tgz" | md5sum -c - && \
