@@ -3,8 +3,16 @@ MAINTAINER MindSwap <mindswap@ro.ru>
 
 RUN apt-get update && \
     apt-get -y upgrade && \
-    apt-get install -y supervisor nginx php-fpm php-gd wget unzip && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    apt-get install -y \
+    supervisor \
+    nginx \
+    php-fpm \
+    php-gd \
+    wget \
+    unzip && \
+    apt-get clean autoclean && \
+    apt-get autoremove && \
+    rm -rf /var/lib/{apt,dpkg,cache,log}
     
 ENV DOKUWIKI_VERSION 2018-04-22a
 ENV MD5_CHECKSUM 18765a29508f96f9882349a304bffc03
@@ -35,8 +43,8 @@ RUN wget -q "https://github.com/selfthinker/dokuwiki_plugin_wrap/archive/stable.
     mv /var/www/lib/plugins/dokuwiki_plugin_wrap-stable/ /var/www/lib/plugins/wrap/ && \
     rm -rf stable.zip
     
-RUN echo "cgi.fix_pathinfo = 0;" >> /etc/php7/fpm/php.ini
-RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php7/fpm/php-fpm.conf
+RUN echo "cgi.fix_pathinfo = 0;" >> /etc/php/7.0/fpm/php.ini
+RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/7.0/fpm/php-fpm.conf
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm /etc/nginx/sites-enabled/*
 ADD dokuwiki.conf /etc/nginx/sites-enabled/    
