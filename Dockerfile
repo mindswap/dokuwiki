@@ -1,3 +1,5 @@
+# DESCRIPTION:    Image with DokuWiki
+
 FROM ubuntu:16.04
 MAINTAINER MindSwap <mindswap@ro.ru>
 
