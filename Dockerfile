@@ -1,8 +1,9 @@
-FROM ubuntu:trusty
+FROM ubuntu:16.04
 MAINTAINER MindSwap <mindswap@ro.ru>
 
 RUN apt-get update && \
-    apt-get install -y supervisor nginx php5-fpm php5-gd wget unzip && \
+    apt-get -y upgrade && \
+    apt-get install -y supervisor nginx php-fpm php-gd wget unzip && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
     
 ENV DOKUWIKI_VERSION 2018-04-22a
