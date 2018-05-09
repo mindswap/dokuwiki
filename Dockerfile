@@ -33,10 +33,6 @@ RUN wget -q "https://github.com/selfthinker/dokuwiki_plugin_wrap/archive/stable.
     unzip stable.zip -d /var/www/lib/plugins/ && \
     mv /var/www/lib/plugins/dokuwiki_plugin_wrap-stable/ /var/www/lib/plugins/wrap/ && \
     rm -rf stable.zip
-
-RUN wget -q "http://www.heiko-barth.de/downloads/dw_codebutton.zip" && \
-    unzip dw_codebutton.zip -d /var/www/lib/plugins/ && \
-    rm -rf dw_codebutton.zip
     
 RUN echo "cgi.fix_pathinfo = 0;" >> /etc/php5/fpm/php.ini
 RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
